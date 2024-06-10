@@ -4,19 +4,26 @@ import styled, { keyframes } from 'styled-components';
 import useMediaQuery from '../hooks/useMediaQuery';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 
+import CardLarge from '../components/cards/CardLarge';
 import TypoH3 from '../components/typographys/TypoH3';
+import TypoH4 from '../components/typographys/TypoH4';
 import TypoH6 from '../components/typographys/TypoH6';
-import Subtitle from '../components/typographys/Subtitle';
 import ParagraphS from '../components/typographys/ParagraphS';
-import Caption from '../components/typographys/Caption';
 
-import Phone from '../assets/Phone.png';
-import Typo from '../assets/typo.png';
+import Coupon from '../assets/coupon.png';
 
 
-
+const slideUpAnimation = keyframes`
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
 const SectionWrapper = styled.section`
-  padding: 2rem;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -31,68 +38,71 @@ const ContsWrapper = styled.section`
   max-width: 144rem;
   padding: 2rem;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  flex-shrink: 0;
-`;
-const ContsLeft = styled.div`
-  width: 40%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-   img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-   }
-`;
-const ContsRight = styled.div`
-  width: 50%;
-  height: 50%;
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 10rem;
-  img {
+  flex-shrink: 0;
+  @media (max-width: 1024px) {  // tablet
+    padding: 6rem;
+    gap: 8rem;
+  }
+  @media (max-width: 768px) {  // mobile
+    padding: 6rem;
+    gap: 5rem;
+  }
+`;
+const ContsTop = styled.div`
     width: 100%;
-    height: 100%;
-    object-fit: contain;
-   }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
 `;
-const TypoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
+const ContsBtm = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
 `;
+const CardTitle = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-shrink: 0;
+  `
 const Span = styled.span`
-  color: var(--Selective-Yellow-500);
-`;
+    color: var(--Selective-Yellow-500);
+  `;
 
 
 const Section03 = () => {
+  const sectionRef = useScrollAnimation(slideUpAnimation);
   const isTablet = useMediaQuery('(max-width: 1024px)');
   const isMobile = useMediaQuery('(max-width: 768px)');
-
 
   return (
     <SectionWrapper tablet={isTablet} mobile={isMobile}>
       <ContsWrapper>
-        <ContsLeft>
-          <img src={Phone} />
-        </ContsLeft>
-        <ContsRight>
-          <img src={Typo} />
-          <TypoWrapper>
-            <TypoH3>혼자서 끙끙 앓지 말고</TypoH3> 
-            <TypoH3>차라리 기쁨으로 승화 시키자!</TypoH3>
-          </TypoWrapper>
-        </ContsRight>
+        <ContsTop>
+          {isMobile ? (
+            <TypoH6 fontWeight='600' textAlign='center'>당신의 <Span>웃픈 인테리어 사진</Span>을 기다립니다!</TypoH6>
+          ) : isTablet ? (
+            <TypoH4 fontWeight='600' textAlign='center'>당신의 <Span>웃픈 인테리어 사진</Span>을 기다립니다!</TypoH4>
+          ) : (
+            <TypoH3 fontWeight='600' textAlign='center'>당신의 <Span>웃픈 인테리어 사진</Span>을 기다립니다!</TypoH3>
+          )}
+        </ContsTop>
+        <ContsBtm ref={sectionRef}>
+          <CardLarge image={Coupon}>
+            <CardTitle>
+              <TypoH6 color='var(--Selective-Yellow-500)' fontWeight='700'>리워드 받기</TypoH6>
+              <ParagraphS color='var(--Neutral-Gray-400)' fontWeight='600'>매월 5분을 추첨해서 롯데 상품권을 드립니다!<br />많은 참여 부탁드립니다!</ParagraphS>
+            </CardTitle>
+          </CardLarge>
+        </ContsBtm>
       </ContsWrapper>
     </SectionWrapper>
   );

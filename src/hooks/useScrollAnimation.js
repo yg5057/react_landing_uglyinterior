@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-const useScrollAnimation = (keyframes, threshold = 0.1) => {
+const useScrollAnimation = (keyframes, threshold = 0.2) => {
   const ref = useRef(null);
   const [animationStarted, setAnimationStarted] = useState(false);
 
