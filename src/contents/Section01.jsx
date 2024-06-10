@@ -3,7 +3,8 @@ import styled, { keyframes } from 'styled-components';
 
 import Scroll from '../components/scroll/Scroll';
 
-import UglyInterior from '../assets/ugly_interior_contest1.png';
+// import UglyInterior from '../assets/ugly_interior_contest1.png';
+import UglyInterior from '../assets/ugly_interior_contest2.png';
 
 
 const slideUpAnimation = keyframes`
