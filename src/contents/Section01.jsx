@@ -33,12 +33,21 @@ const ContsWrapper = styled.article`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 2.5rem;
   animation: ${slideUpAnimation} 1s ease forwards;
     img {
       width: 100%;
       height: 90%;
       object-fit: contain;
     }
+  @media (max-width: 768px) {  // mobile
+    gap: 10rem;
+    img {
+      width: 100%;
+      height: fit-content;
+      object-fit: contain;
+    }
+  }
 `;
 const ScrollWrapper = styled.div`
     display: flex;
